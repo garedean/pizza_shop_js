@@ -18,8 +18,51 @@
       <h1 class="page-header text-center">Taste of Italy</h1>
 
       <div class="row">
-          <div class="col-sm-12" >
+        <div class="col-sm-6 col-sm-offset-3">
+          <form>
+            <div class="form-group">
+              <label for="pizza-size">Pizza Size:</label>
+
+              <select class="form-control" id="pizza-size">
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>Extra-Large</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Toppings:</label>
+              <p class="note text-small"> (to select multiple, hold down the 'control' key while clicking using Windows. For Mac, hold down the 'command' key):</p>
+
+              <select multiple class="form-control" id="pizza-toppings" size="14">
+                <optgroup label="Veggie toppings - $1 per topping">
+                  <option value="1">Bell Peppers</option>
+                  <option value="1">Olives</option>
+                  <option value="1">Spinach</option>
+                  <option value="1">Artichoke Hearts</option>
+                  <option value="1">Roasted Eggplant</option>
+                  <option value="1">Basil</option>
+                  <option value="1">Garlic</option>
+                  <option value="1"></option>
+                </optgroup>
+                <optgroup label="Meat toppings - $2 per topping">
+                  <option value="2">Pepperoni</option>
+                  <option value="2">Italian Sausage</option>
+                  <option value="2">Linguisa</option>
+                  <option value="2">Anchovies</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <button class="btn btn-default stretch">What's it cost?</button>
+          </form>
+
+
+          <div id="cost-wrapper" class="text-center">
+            <span class="text-large">$18.50</span>
           </div>
+
         </div>
       </div>
     </div>
