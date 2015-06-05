@@ -1,14 +1,17 @@
-function Order() {
-  this.pizzas = [];
-}
+var pizza = new Pizza();
 
-function Pizza(size) {
-  this.size     = getSelectedSize();
-  this.toppings = getSelectedToppings();
+function Pizza() {
+  this.size     = "";
+  this.toppings = {};
+  this.quantity = 1;
 }
 
 Pizza.prototype.costOfToppings = function() {
   var total = 0;
+
+  if (this.toppings === null) {
+    return 0;
+  }
 
   for(var key in this.toppings) {
     var value = this.toppings[key];
@@ -19,6 +22,7 @@ Pizza.prototype.costOfToppings = function() {
 }
 
 Pizza.prototype.costOfSize = function() {
+
   if (this.size === "small") {
     return 5;
   } else if (this.size === "medium") {
@@ -27,12 +31,38 @@ Pizza.prototype.costOfSize = function() {
     return 15;
   } else if (this.size === "extra-large") {
     return 20;
+  } else {
+    // if size is not yet selected
+    return 0;
   }
 }
 
-Pizza.prototype.totalCost = function() {
+Pizza.prototype.updateSize = function(size) {
+  this.size = size;
+}
+
+Pizza.prototype.updateToppings = function(toppings) {
+  this.toppings = toppings;
+}
+
+Pizza.prototype.updateQuantity = function(quantity) {
+  this.quantity = quantity;
+}
+
+Pizza.prototype.costOfOne = function() {
   return this.costOfSize() + this.costOfToppings();
-  debugger;
+}
+
+Pizza.prototype.costOfAll = function() {
+  // if the user has selected a size, calculate cost
+  if (this.size) {
+    return this.costOfOne() * this.quantity;
+  } else {
+  // if a size has not been selected, don't talley
+  // up cost of toppings alone. User must select a size
+  // before getting a total
+    return 0;
+  }
 }
 
 function getSelectedSize() {
@@ -49,16 +79,63 @@ function getSelectedToppings() {
   return selectedToppings;
 }
 
-function updateTotalPrice(pizza) {
-  $("#cost-wrapper").addClass("show");
-  $("#cost-wrapper > span").text("$" + pizza.totalCost());
+function getDesiredQuantity() {
+  var quantity = parseInt($('#pizza-quantity').val());
+
+  if (quantity) {
+    return quantity;
+  } else {
+    return pizza.quantity;
+  }
+}
+
+function updateTotalPrice() {
+  var orderTotal = pizza.costOfAll();
+
+  if (orderTotal >= 0 && orderTotal < 10000) {
+    $("#cost-wrapper > span").text("$" + orderTotal);
+  } else if (orderTotal > 10000) {
+    $("#cost-wrapper > span").text("you must like pizza!");
+  } else {
+    $("#cost-wrapper > span").text("");
+  }
+}
+
+function resetQuantity() {
+  pizza.updateQuantity(1);
+  $('#pizza-quantity').val("1");
+  updateTotalPrice();
 }
 
 $(function() {
   $("form").submit(function(event) {
     event.preventDefault();
+  });
 
-    var pizza = new Pizza();
+  $("#pizza-size").change(function() {
+    pizza.updateSize(getSelectedSize());
     updateTotalPrice(pizza);
+  });
+
+  $("option").click(function() {
+    pizza.updateToppings(getSelectedToppings());
+    updateTotalPrice(pizza);
+  });
+
+  $("input").keyup(function() {
+    pizza.updateQuantity(getDesiredQuantity());
+    updateTotalPrice();
+  });
+
+  $("#submit").click(function(event) {
+    event.preventDefault();
+
+    if (isNaN(parseInt($('#pizza-quantity').val())) ||
+        parseInt($('#pizza-quantity').val()) <= 0) {
+      alert("Please selected a quantity of '1' or more.")
+      resetQuantity();
+    } else {
+      alert("Order success!");
+    }
   });
 });
