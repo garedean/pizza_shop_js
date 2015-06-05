@@ -1,0 +1,55 @@
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, .85);
+  height: 100%;
+}
+
+.page-header {
+  margin-top: 20px;
+  border-bottom: 3px double #555;
+}
+
+#background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -9999;
+}
+
+.column {
+  position: absolute;
+  width: 33.3333%;
+  top: 0;
+  bottom: 0;
+}
+
+.column.green {
+  background-color: rgba(0, 146, 70, .5);
+}
+
+.white {
+  background-color: rgba(241, 242, 241, .5);
+  left: 33.333%;
+}
+
+.red {
+  background-color: rgba(206, 43, 55, .5);
+  left: 66.666%;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .container {
+    border-radius: 5px;
+    margin-top: 50px;
+    padding-bottom: 50px;
+    height: initial;
+  }
+
+}
