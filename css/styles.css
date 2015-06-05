@@ -1,16 +1,26 @@
 html,
 body {
   height: 100%;
+  font-family: 'Alegreya', serif;
+  font-size: 1.1em;
+  color: #444;
 }
 
 .container {
-  background-color: rgba(255, 255, 255, .85);
-  height: 100%;
+  min-height: 100%;
+  background-color: rgba(241, 242, 241, .95);
+  min-width: 200px;
 }
 
 .page-header {
+  border-bottom: 3px double #ccc;
+  font-family: 'Niconne', cursive;
+  font-size: 2.4em;
+  color: #444;
+}
+
+.form-group {
   margin-top: 20px;
-  border-bottom: 3px double #555;
 }
 
 #background {
@@ -22,6 +32,10 @@ body {
   z-index: -9999;
 }
 
+#background > div {
+  z-index: inherit;
+}
+
 .column {
   position: absolute;
   width: 33.3333%;
@@ -29,17 +43,37 @@ body {
   bottom: 0;
 }
 
-.column.green {
-  background-color: rgba(0, 146, 70, .5);
+.text-large {
+  font-size: 2.4em;
 }
 
-.white {
-  background-color: rgba(241, 242, 241, .5);
-  left: 33.333%;
+#cost-wrapper {
+  min-height: 88px;
+  margin: 20px 0;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.text-small {
+  font-size: .7em;
+}
+
+button.stretch {
+  width: 100%;
+}
+
+.btn:focus,
+.btn:active:focus {
+  outline: none;
+}
+
+.column.green {
+  background-color: rgba(0, 146, 70, 1);
 }
 
 .red {
-  background-color: rgba(206, 43, 55, .5);
+  background-color: rgba(206, 43, 55, 1);
   left: 66.666%;
 }
 
@@ -47,9 +81,21 @@ body {
 @media (min-width: 768px) {
   .container {
     border-radius: 5px;
-    margin-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     height: initial;
+    width: 33.333%;
+    border-radius: 0px;
+    background-color: rgba(241, 242, 241, 1);
   }
 
+  #background .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: .25;
+    z-index: -9998;
+    background-image: radial-gradient(circle at bottom center, white, black 75%)
+  }
 }
