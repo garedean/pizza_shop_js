@@ -33,7 +33,7 @@ Hand-crafted quality by
 
           <form>
             <div class="form-group">
-              <label for="pizza-size">Pizza Size:</label>
+              <label for="pizza-size" class="control-label">Pizza Size:</label>
 
               <select class="form-control" id="pizza-size" required>
                 <option selected disabled hidden value=""></option>
@@ -45,7 +45,7 @@ Hand-crafted quality by
             </div>
 
             <div class="form-group">
-              <label>Toppings:</label>
+              <label for"pizza-toppings" class="control-label">Toppings:</label>
               <p class="note text-small">To select multiple toppings using Windows, hold down the 'control' key while clicking. For Mac, hold down the 'command' key.</p>
 
               <select multiple class="form-control" id="pizza-toppings" size="13">
@@ -68,9 +68,9 @@ Hand-crafted quality by
             </div>
 
             <div class="form-group">
-              <label for="pizza-quantity">Quantity:</label>
+              <label for="pizza-quantity" class="control-label">Quantity:</label>
 
-              <input class="form-control" id="pizza-quantity" type="number" required value="1">
+              <input class="form-control" id="pizza-quantity" type="number" required value="1" min="1">
             </div>
 
             <div id="cost-wrapper" class="text-center">

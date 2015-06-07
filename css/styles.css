@@ -1,6 +1,6 @@
 html,
 body {
-  height: 100%;
+  /*height: 100%;*/
   font-family: 'Alegreya', serif;
   font-size: 1.1em;
   color: #444;
@@ -24,7 +24,7 @@ body {
 }
 
 #background {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;

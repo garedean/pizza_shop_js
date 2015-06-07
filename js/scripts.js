@@ -92,6 +92,7 @@ function getDesiredQuantity() {
 function updateTotalPrice() {
   var orderTotal = pizza.costOfAll();
 
+  debugger;
   if (orderTotal >= 0 && orderTotal < 10000) {
     $("#cost-wrapper > span").text("$" + orderTotal);
   } else if (orderTotal > 10000) {
@@ -107,35 +108,53 @@ function resetQuantity() {
   updateTotalPrice();
 }
 
+function validateRange(field) {
+  if (field.val() < 1) {
+    field.parent().addClass("has-error");
+  } else {
+    field.parent().removeClass("has-error");
+  }
+}
+
+function validatePresence(field) {
+  if (!field.val()) {
+    field.parent().addClass("has-error");
+  }
+}
+
+function validateForm() {
+  validatePresence($("#pizza-size"));
+  validatePresence($("#pizza-quantity"));
+  validateRange($("#pizza-quantity"));
+}
+
+function removeValidation(dropdown) {
+  dropdown.parent().removeClass("has-error");
+}
+
 $(function() {
-  $("form").submit(function(event) {
-    event.preventDefault();
+  $("form").submit(function() {
+    alert("success!");
   });
 
   $("#pizza-size").change(function() {
     pizza.updateSize(getSelectedSize());
     updateTotalPrice(pizza);
+    removeValidation($(this));
   });
 
-  $("option").click(function() {
+  $("#pizza-toppings").find("option").click(function() {
     pizza.updateToppings(getSelectedToppings());
     updateTotalPrice(pizza);
   });
 
-  $("input").keyup(function() {
+  $("#pizza-quantity").keyup(function() {
     pizza.updateQuantity(getDesiredQuantity());
+    validateRange($(this));
     updateTotalPrice();
   });
 
-  $("#submit").click(function(event) {
-    event.preventDefault();
-
-    if (isNaN(parseInt($('#pizza-quantity').val())) ||
-        parseInt($('#pizza-quantity').val()) <= 0) {
-      alert("Please selected a quantity of '1' or more.")
-      resetQuantity();
-    } else {
-      alert("Order success!");
-    }
+  $("#submit").click(function() {
+    validateForm();
   });
 });
