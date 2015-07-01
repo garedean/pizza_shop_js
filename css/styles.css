@@ -4,6 +4,7 @@ body {
   font-family: 'Alegreya', serif;
   font-size: 1.1em;
   color: #444;
+  -webkit-font-smoothing: antialiased;
 }
 
 .container {
